@@ -1,9 +1,8 @@
 <template>
-  <div class="about">
-    <ajax-handler :url="`Beers/${id}`">
+  <div class="beer">
+    <ajax-handler :url="`Beers/${id}`" class="wrapper">
       <template #default="{data}">
         <detail v-bind="{ ...data }" />
-        <!-- :data="data" -->
       </template>
     </ajax-handler>
   </div>
@@ -30,3 +29,13 @@ export default {
   }
 };
 </script>
+<style lang="sass">
+.beer ::v-deep .wrapper
+  justify-content: center
+
+.beer .wrapper
+  display: grid
+
+  *
+    justify-self: center
+</style>
