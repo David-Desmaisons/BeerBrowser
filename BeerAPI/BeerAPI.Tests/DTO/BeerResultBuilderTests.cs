@@ -15,6 +15,13 @@ namespace BeerAPI.Tests.DTO
         }
 
         [Theory, AutoData]
+        public void SetId_value_is_passed_to_build_object(int value)
+        {
+            var result = _BeerResultBuilder.SetId(value).Build();
+            result.Id.Should().Be(value);
+        }
+
+        [Theory, AutoData]
         public void SetName_value_is_passed_to_build_object(string value)
         {
             var result = _BeerResultBuilder.SetName(value).Build();

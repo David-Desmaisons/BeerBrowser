@@ -18,7 +18,7 @@ namespace BeerAPI.Controllers
         {
             return new []
             {
-                new BeerResultBuilder().SetName("Fisher").Build()
+                Bud()
             };
         }
 
@@ -28,7 +28,22 @@ namespace BeerAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<BeerResult>> Get(int id)
         {
-            return new BeerResultBuilder().SetName("Fisher").Build();
+            return Bud();
+        }
+
+        private BeerResult Bud()
+        {
+            return new BeerResultBuilder()
+                .SetId(1)
+                .SetName("Budweiser")
+                .SetDescription("Só uma cerveja como a Budweiser consegue manter os 143 anos de história e, ao mesmo tempo, ter a autenticidade e liberdade para ser o que quiser. Ela não muda sua fórmula e nunca perde sua essência. Só Bud faz Bud.")
+                .SetAlcoholPercentage(5)
+                .SetHarmonization("O sabor marcante no começo e suave no final de Budweiser pede que ela harmonize com hambúrguer clássico, presunto cozido e mix de castanhas.")
+                .SetTemperature("0-4 ºC")
+                .SetIngredients("Água, malte, arroz e lúpulo.")
+                .SetPictureUrl(@"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png")
+                .SetColor(10)
+                .Build();
         }
 
         // POST api/values

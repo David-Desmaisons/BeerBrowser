@@ -5,13 +5,14 @@
         public string Name { get; }
         public string Description { get; }
         public string Harmonization { get; }
-        public string Color { get; }
+        public int Color { get; }
         public decimal AlcoholPercentage { get; }
         public string Temperature { get; }
         public string Ingredients { get; }
         public string PictureUrl { get; }
+        public int Id { get; }
 
-        public BeerResult(string name, string description, string temperature, string pictureUrl, decimal alcoholPercentage, string harmonization, string color, string ingredients)
+        public BeerResult(int id, string name, string description, string temperature, string pictureUrl, decimal alcoholPercentage, string harmonization, int color, string ingredients)
         {
             this.Description = description;
             this.PictureUrl = pictureUrl;
@@ -19,6 +20,7 @@
             this.Harmonization = harmonization;
             this.Color = color;
             this.Ingredients = ingredients;
+            this.Id = id;
             this.Temperature = temperature;
             this.Name = name;
         }
