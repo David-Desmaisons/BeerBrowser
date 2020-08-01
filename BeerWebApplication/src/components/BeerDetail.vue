@@ -3,30 +3,31 @@
     <div class="name">
       {{ name }}
     </div>
+
     <div class="description">
       {{ description }}
     </div>
+
     <div class="harmonization">
       <h2>Harmonização</h2>
       {{ harmonization }}
     </div>
+
     <div class="ingredients">
       <h2>Ingredients</h2>
       {{ ingredients }}
     </div>
 
-    <div>
+    <div class="details">
       <h2>Temperatura ideal</h2>
       {{ temperature }}
       <h2>Teor alcoólico</h2>
       {{ alcoholPercentage }}%
       <h2>Cor</h2>
-      {{ color }}%
+      {{ color }} % vol
     </div>
 
     <img class="image" :src="pictureUrl" alt="foto" />
-    <div></div>
-    <div></div>
   </v-card>
 </template>
 <script>
@@ -61,13 +62,21 @@ export default {
   row-gap: 10px
   padding: 10px
 
+  @media screen and (max-width: 1100px)
+    grid-template-columns: 1fr 1fr
+    grid-template-rows: 120px 140px 100px 100px auto 60px
+    grid-template-areas: "name image" "description image" "harmonization image" "ingredients image" "details image" "details actions"
+
   *
     justify-self: stretch !important
+    align-self: center
 
   .image
     grid-area: image
     max-height: 100%
     justify-self: center
+    width: auto
+    height: auto
 
   .name
     grid-area: name
@@ -79,4 +88,10 @@ export default {
 
   .ingredients
     grid-area: ingredients
+
+  .harmonization
+    grid-area: harmonization
+
+  .details
+    grid-area: details
 </style>
