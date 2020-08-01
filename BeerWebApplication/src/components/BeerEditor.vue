@@ -9,23 +9,8 @@
   </div>
 </template>
 <script>
-const createProps = (type, names) =>
-  names
-    .map(name => ({ [name]: { type } }))
-    .reduce((previous, current) => ({ ...previous, ...current }), {});
-
 export default {
-  props: {
-    ...createProps(String, [
-      "name",
-      "description",
-      "harmonization",
-      "ingredients",
-      "temperature",
-      "pictureUrl"
-    ]),
-    ...createProps(Number, ["id", "alcoholPercentage", "color"])
-  }
+  props: {}
 };
 </script>
 <style lang="sass" scoped>

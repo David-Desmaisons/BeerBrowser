@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import finder from "../components/BeerFinder"
+import finder from "../components/BeerFinder";
 export default {
   name: "Home",
   props: {
@@ -13,7 +13,7 @@ export default {
       required: true
     }
   },
-  components:{
+  components: {
     finder
   }
 };

@@ -1,10 +1,8 @@
 <template>
-  <div>
-    Beer finder
-  </div>
+  <div class="create"></div>
 </template>
 <script>
 export default {
-  name: "BeerFinder"
+  name: "Beer-Create"
 };
 </script>
