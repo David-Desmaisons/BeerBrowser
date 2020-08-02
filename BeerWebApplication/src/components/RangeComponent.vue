@@ -9,7 +9,7 @@
     class="align-center"
   >
     <template v-if="thumbLabel" v-slot:thumb-label="{ value }">
-          {{ value }}{{unidade}}
+      {{ value }}{{ unidade }}
     </template>
   </v-range-slider>
 </template>
@@ -35,7 +35,7 @@ export default {
       default: "always"
     },
     unidade: {
-      type:String,
+      type: String
     }
   },
   computed: {

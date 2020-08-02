@@ -10,15 +10,29 @@
           <v-container>
             <v-row>
               <v-col cols="12" md="6">
-                <v-text-field v-model="query.name" label="Nome" />
+                <v-text-field
+                  v-model="query.name"
+                  label="Nome"
+                  placeholder="Digita aqui"
+                />
               </v-col>
 
               <v-col cols="12" md="6">
-                <v-text-field v-model="query.ingredient" label="Ingredient" />
+                <Autocomplete
+                  v-model="query.ingredient"
+                  label="Ingredient"
+                  placeholder="Digita aqui"
+                />
               </v-col>
 
               <v-col cols="12" md="4" class="color-picker">
-                <Range v-model="query.color" label="Cor" :min="0" :max="100" :thumb-label="false"/>
+                <Range
+                  v-model="query.color"
+                  label="Cor"
+                  :min="0"
+                  :max="100"
+                  :thumb-label="false"
+                />
               </v-col>
 
               <v-col cols="12" md="4">
@@ -47,12 +61,17 @@
         </v-form>
       </v-card>
 
-      <v-card lg12 v-if="nothingFound">
-        <v-card-title class="feedback">
-          <p>
+      <v-card lg12 v-if="nothingFound" class="feedback">
+        <v-card-title>
+          <div>
             Nenhuma cerveja corresponde a essa pesquisa.
-          </p>
+          </div>
+          <br />
         </v-card-title>
+        <v-card-text v-if="!filtered">
+          <router-link :to="{ name: 'Create' }">Clica aqui</router-link>para
+          adicionar uma cerveja.
+        </v-card-text>
       </v-card>
 
       <BeerCard v-for="beer in beers" :key="beer.id" :beer="beer" />
@@ -60,9 +79,11 @@
   </v-container>
 </template>
 <script>
-import { get } from "../infra/ajax";
 import BeerCard from "./BeerCard";
 import Range from "./RangeComponent";
+import Autocomplete from "./Autocomplete";
+
+import { get } from "../infra/ajax";
 import debounce from "lodash.debounce";
 import ScrollWatch from "scrollwatch";
 
@@ -72,6 +93,7 @@ export default {
   name: "BeerFinder",
   components: {
     BeerCard,
+    Autocomplete,
     Range
   },
   data() {
@@ -81,6 +103,7 @@ export default {
       loading: false,
       loadedAll: false,
       reloading: false,
+      filtered: false,
       query: {
         name: "",
         ingredient: "",
@@ -141,6 +164,11 @@ export default {
       }
     },
     loadDebounce: debounce(async function() {
+      this.reloading = true;
+      this.filtered = true;
+      this.firstload = true;
+      this.beers = [];
+      this.pageNumber = 0;
       await this.loadNextPage();
       this.reloading = false;
     }, 750)
@@ -149,16 +177,11 @@ export default {
     query: {
       deep: true,
       handler() {
-        if (this.reloading) {
+        if (this.reloading || this.loading) {
           return;
         }
         this.reloading = true;
-        this.$nextTick(() => {
-          this.firstload = true;
-          this.beers = [];
-          this.pageNumber = 0;
-          this.loadDebounce();
-        });
+        this.loadDebounce();
       }
     }
   }
@@ -169,7 +192,13 @@ export default {
   width: 100%
   margin-right: 150px
 
-  .color-picker ::v-deep .v-slider.v-slider--horizontal
-    background-image: url(../assets/range-product-color.png)
-    background-size: 100% 100%
+.feedback
+  width: 100%
+  margin-right: 150px
+  display: block
+  background-color: rgba(255, 0, 0, 0.6)
+
+.color-picker ::v-deep .v-slider.v-slider--horizontal
+  background-image: url(../assets/range-product-color.png)
+  background-size: 100% 100%
 </style>
