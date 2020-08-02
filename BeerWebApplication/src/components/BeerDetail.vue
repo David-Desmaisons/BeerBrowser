@@ -22,7 +22,7 @@
             Cancela
           </v-btn>
 
-          <v-btn color="red darken-1" text @click="deleteBeer">
+          <v-btn color="red darken-1" dark @click="deleteBeer">
             excluir
           </v-btn>
         </v-card-actions>
