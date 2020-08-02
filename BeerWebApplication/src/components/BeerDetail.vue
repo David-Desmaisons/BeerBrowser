@@ -33,7 +33,7 @@
         <v-tooltip top>
           <template v-slot:activator="{ on, attrs }">
             <v-icon v-bind="attrs" v-on="on">mdi-percent-outline</v-icon>
-            {{ alcoholPercentage }}%
+            {{ alcoholPercentage }}
           </template>
           <span>Teor alcoólico (% vol)</span>
         </v-tooltip>
@@ -50,15 +50,51 @@
     </div>
 
     <div class="actions">
-      <v-btn
-        color="primary"
-        fab
-        small
-        dark
-        :to="{ name: 'BeerEdit', params: { id } }"
-      >
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
+      <v-tooltip top>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="primary"
+            fab
+            small
+            :to="{ name: 'BeerEdit', params: { id: `${id}` } }"
+            v-bind="attrs" v-on="on" 
+          >
+            <v-icon>mdi-pencil</v-icon>
+          </v-btn>
+        </template>
+        <span>Editar cerveja</span>
+      </v-tooltip>
+
+       <v-tooltip top>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="secondary"
+            fab
+            small
+            @click="deleteBeer"
+            v-bind="attrs" v-on="on" 
+          >
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
+        </template>
+        <span>Excluir cerveja</span>
+      </v-tooltip>
+
+       <v-tooltip top>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="success"
+            fab
+            small
+            dark
+            :to="{ name: 'Home' }"
+            v-bind="attrs" v-on="on" 
+          >
+            <v-icon>mdi-glass-mug</v-icon>
+          </v-btn>
+        </template>
+        <span>Menu principal</span>
+      </v-tooltip>
     </div>
 
     <img class="image" :src="pictureUrl" alt="foto" />
@@ -98,6 +134,11 @@ export default {
       return this.ingredients.reduce(
         (previous, current) => `${previous}, ${current}`
       );
+    }
+  },
+  methods:{
+    deleteBeer(){
+      window.console.log("delete");
     }
   }
 };
@@ -149,6 +190,11 @@ export default {
 
   .actions
     grid-area: actions
+    display: flex
+    justify-content: flex-end
+    margin-right: 20px
+    *
+      margin: 10px
 
   .details
     grid-area: details
