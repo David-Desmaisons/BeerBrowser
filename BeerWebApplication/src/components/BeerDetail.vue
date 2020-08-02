@@ -1,5 +1,39 @@
 <template>
   <v-card class="beer-detail">
+
+    <v-dialog
+      v-model="deleteModal"
+      max-width="290"
+    >
+      <v-card>
+        <v-card-title class="headline">Confirma a exclusão</v-card-title>
+
+        <v-card-text>
+          Esse item sera definitivamente excluído.
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="green darken-1"
+            text
+            @click="deleteModal = false"
+          >
+            Cancela
+          </v-btn>
+
+          <v-btn
+            color="red darken-1"
+            text
+            @click="deleteBeer"
+          >
+            excluir
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <div class="name">
       {{ name }}
     </div>
@@ -71,7 +105,7 @@
             color="secondary"
             fab
             small
-            @click="deleteBeer"
+            @click="deleteModal=true"
             v-bind="attrs" v-on="on" 
           >
             <v-icon>mdi-delete</v-icon>
@@ -136,8 +170,14 @@ export default {
       );
     }
   },
+  data(){
+    return {
+      deleteModal: false
+    }
+  },
   methods:{
     deleteBeer(){
+      this.deleteModal = false;
       window.console.log("delete");
     }
   }
