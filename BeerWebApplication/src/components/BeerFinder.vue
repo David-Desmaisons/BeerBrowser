@@ -18,13 +18,15 @@
               </v-col>
 
               <v-col cols="12" md="4" class="color-picker">
-                <Range v-model="query.color" label="Cor" :min="0" :max="100" />
+                <Range v-model="query.color" label="Cor" :min="0" :max="100" :thumb-label="false"/>
               </v-col>
 
               <v-col cols="12" md="4">
                 <Range
                   v-model="query.temperature"
                   label="Temperatura"
+                  thumb-label="always"
+                  unidade="ºC"
                   :min="0"
                   :max="30"
                 />
@@ -34,8 +36,10 @@
                 <Range
                   v-model="query.alcoholPercentage"
                   label="Teor alcoólico"
+                  thumb-label="always"
+                  unidade="%"
                   :min="0"
-                  :max="100"
+                  :max="40"
                 />
               </v-col>
             </v-row>
@@ -59,8 +63,9 @@
 import { get } from "../infra/ajax";
 import BeerCard from "./BeerCard";
 import Range from "./RangeComponent";
-
+import debounce from "lodash.debounce";
 import ScrollWatch from "scrollwatch";
+
 const pageLength = 20;
 
 export default {
@@ -134,22 +139,25 @@ export default {
       } catch (error) {
         window.console.log(error);
       }
-    }
+    },
+    loadDebounce: debounce(async function() {
+      await this.loadNextPage();
+      this.reloading = false;
+    }, 750)
   },
-  watch:{
-    query:{
+  watch: {
+    query: {
       deep: true,
-      handler(){
-        if (this.reloading){
+      handler() {
+        if (this.reloading) {
           return;
         }
         this.reloading = true;
-        this.$nextTick(async () =>{
+        this.$nextTick(() => {
           this.firstload = true;
           this.beers = [];
-          this.pageNumber =0;
-          await this.loadNextPage();
-          this.reloading = false;
+          this.pageNumber = 0;
+          this.loadDebounce();
         });
       }
     }

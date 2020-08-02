@@ -5,8 +5,12 @@
     :max="max"
     :min="min"
     :label="label"
+    :thumb-label="thumbLabel"
     class="align-center"
   >
+    <template v-if="thumbLabel" v-slot:thumb-label="{ value }">
+          {{ value }}{{unidade}}
+    </template>
   </v-range-slider>
 </template>
 <script>
@@ -26,6 +30,12 @@ export default {
     },
     label: {
       type: String
+    },
+    thumbLabel: {
+      default: "always"
+    },
+    unidade: {
+      type:String,
     }
   },
   computed: {
