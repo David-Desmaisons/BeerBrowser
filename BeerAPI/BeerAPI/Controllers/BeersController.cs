@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BeerAPI.DTO;
 using Microsoft.AspNetCore.Http;
@@ -49,13 +50,13 @@ namespace BeerAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] BeerResultBuilder value)
         {
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] BeerResultBuilder value)
         {
         }
 
@@ -63,6 +64,7 @@ namespace BeerAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Console.WriteLine($"Delete {id}");
         }
     }
 }
