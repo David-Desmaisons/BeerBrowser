@@ -35,9 +35,9 @@ export default {
   data: () => ({
     //
   }),
-  methods:{
-    scrollToTop(){
-      window.scrollTo(0,0)
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
     }
   }
 };

@@ -5,6 +5,7 @@
       :readonly="readonly"
       @input="change(evt)"
       dense
+      hide-details
       min="0"
       max="100"
     />
