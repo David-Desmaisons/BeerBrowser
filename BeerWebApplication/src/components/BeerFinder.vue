@@ -20,7 +20,7 @@
               <v-col cols="12" md="6">
                 <Autocomplete
                   v-model="query.ingredient"
-                  label="Ingredient"
+                  label="Ingrediente"
                   url="ingredients"
                   placeholder="Digita aqui"
                 />
@@ -39,7 +39,7 @@
               <v-col cols="12" md="4">
                 <Range
                   v-model="query.temperature"
-                  label="Temperatura"
+                  label="Temperatura ideal"
                   thumb-label="always"
                   unidade="ºC"
                   :min="0"
@@ -103,7 +103,6 @@ export default {
       pageNumber: 0,
       loading: false,
       loadedAll: false,
-      reloading: false,
       filtered: false,
       query: {
         name: "",
@@ -123,9 +122,6 @@ export default {
       },
       beers: []
     };
-  },
-  async created() {
-    await this.loadNextPage();
   },
   mounted() {
     const watch = new ScrollWatch({
@@ -160,30 +156,29 @@ export default {
         this.beers.push(...newBeers.results);
         this.loadedAll = newBeers.done;
         this.pageNumber = pageNumber + 1;
-        this.loading = false;
-        this.firstload = false;
       } catch (error) {
         window.console.log(error);
+      } finally {
+        this.loading = false;
+        this.firstload = false;
       }
     },
-    loadDebounce: debounce(async function() {
-      this.reloading = true;
+    loadDebounce: debounce(function() {
       this.filtered = true;
       this.firstload = true;
+      this.loadedAll = false;
       this.beers = [];
       this.pageNumber = 0;
-      await this.loadNextPage();
-      this.reloading = false;
+      this.loadNextPage();
     }, 750)
   },
   watch: {
     query: {
       deep: true,
       handler() {
-        if (this.reloading || this.loading) {
+        if (this.loading) {
           return;
         }
-        this.reloading = true;
         this.loadDebounce();
       }
     }
