@@ -4,6 +4,15 @@
       <template #default="{data}">
         <detail v-bind="{ ...data }" />
       </template>
+
+      <template #loading>
+        <v-skeleton-loader
+          class="boiler-plate"
+          width="1090"
+          height="550"
+          type="card-avatar"
+        />
+      </template>
     </ajax-handler>
   </div>
 </template>
@@ -29,13 +38,13 @@ export default {
   }
 };
 </script>
-<style lang="sass">
-.beer ::v-deep .wrapper
-  justify-content: center
-
+<style lang="sass" scoped>
 .beer .wrapper
   display: grid
 
   *
     justify-self: center
+
+  ::v-deep .v-skeleton-loader__image
+    height: 500px
 </style>
