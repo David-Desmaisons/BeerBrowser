@@ -167,6 +167,7 @@ export default {
 <style lang="sass" scoped>
 .search
   width: 100%
+  margin-right: 150px
 
   .color-picker ::v-deep .v-slider.v-slider--horizontal
     background-image: url(../assets/range-product-color.png)
