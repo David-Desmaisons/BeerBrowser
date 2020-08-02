@@ -110,23 +110,6 @@
         </template>
         <span>Excluir cerveja</span>
       </v-tooltip>
-
-      <v-tooltip top>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="success"
-            fab
-            small
-            dark
-            :to="{ name: 'Home' }"
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-icon>mdi-glass-mug</v-icon>
-          </v-btn>
-        </template>
-        <span>Menu principal</span>
-      </v-tooltip>
     </div>
 
     <img class="image" :src="pictureUrl" alt="foto" />
