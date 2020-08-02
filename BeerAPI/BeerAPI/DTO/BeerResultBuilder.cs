@@ -10,7 +10,7 @@
         private decimal _AlcoholPercentage;
         private int _MinTemperature;
         private int _MaxTemperature;
-        private string _Ingredients;
+        private string[] _Ingredients;
         private string _PictureUrl;
 
         public BeerResultBuilder SetId(int value)
@@ -55,7 +55,7 @@
             return this;
         }
 
-        public BeerResultBuilder SetIngredients(string value)
+        public BeerResultBuilder SetIngredients(string[] value)
         {
             _Ingredients = value;
             return this;

@@ -14,8 +14,8 @@
     </div>
 
     <div class="ingredients">
-      <h2>Ingredients</h2>
-      {{ ingredients }}
+      <h2>ingredientes</h2>
+      <p>{{ allIngredients }}.</p>
     </div>
 
     <div class="details">
@@ -27,7 +27,6 @@
           </template>
           <span>Temperatura ideal</span>
         </v-tooltip>
-        
       </div>
 
       <div class="alcohol">
@@ -38,19 +37,28 @@
           </template>
           <span>Teor alcoólico (% vol)</span>
         </v-tooltip>
-        
       </div>
 
-       <div class="color-picker">
+      <div class="color-picker">
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <colorDisplayer :value="color" readonly v-bind="attrs" v-on="on"/>
+            <colorDisplayer :value="color" readonly v-bind="attrs" v-on="on" />
           </template>
           <span>Cor</span>
         </v-tooltip>
       </div>
+    </div>
 
-      
+    <div class="actions">
+      <v-btn
+        color="primary"
+        fab
+        small
+        dark
+        :to="{ name: 'BeerEdit', params: { id } }"
+      >
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
     </div>
 
     <img class="image" :src="pictureUrl" alt="foto" />
@@ -65,11 +73,13 @@ const createProps = (type, names) =>
 
 export default {
   props: {
+    ingredients: {
+      type: Array
+    },
     ...createProps(String, [
       "name",
       "description",
       "harmonization",
-      "ingredients",
       "pictureUrl"
     ]),
     ...createProps(Number, [
@@ -82,6 +92,13 @@ export default {
   },
   components: {
     colorDisplayer
+  },
+  computed: {
+    allIngredients() {
+      return this.ingredients.reduce(
+        (previous, current) => `${previous}, ${current}`
+      );
+    }
   }
 };
 </script>
@@ -123,10 +140,15 @@ export default {
 
   .ingredients
     grid-area: ingredients
+    ::first-letter
+      text-transform: capitalize
 
   .harmonization
     grid-area: harmonization
     margin-right: 20px
+
+  .actions
+    grid-area: actions
 
   .details
     grid-area: details
