@@ -1,11 +1,14 @@
 <template>
   <v-card class="beer-detail">
-
-    <v-dialog
-      v-model="deleteModal"
-      max-width="290"
-    >
+    <v-dialog v-model="deleteModal" max-width="290">
       <v-card>
+        <v-progress-linear
+          v-if="deleting"
+          indeterminate
+          color="blue"
+          class="mb-0"
+        />
+
         <v-card-title class="headline">Confirma a exclusão</v-card-title>
 
         <v-card-text>
@@ -15,19 +18,11 @@
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn
-            color="green darken-1"
-            text
-            @click="deleteModal = false"
-          >
+          <v-btn color="green darken-1" text @click="deleteModal = false">
             Cancela
           </v-btn>
 
-          <v-btn
-            color="red darken-1"
-            text
-            @click="deleteBeer"
-          >
+          <v-btn color="red darken-1" text @click="deleteBeer">
             excluir
           </v-btn>
         </v-card-actions>
@@ -91,7 +86,8 @@
             fab
             small
             :to="{ name: 'BeerEdit', params: { id: `${id}` } }"
-            v-bind="attrs" v-on="on" 
+            v-bind="attrs"
+            v-on="on"
           >
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
@@ -99,14 +95,15 @@
         <span>Editar cerveja</span>
       </v-tooltip>
 
-       <v-tooltip top>
+      <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="secondary"
             fab
             small
-            @click="deleteModal=true"
-            v-bind="attrs" v-on="on" 
+            @click="deleteModal = true"
+            v-bind="attrs"
+            v-on="on"
           >
             <v-icon>mdi-delete</v-icon>
           </v-btn>
@@ -114,7 +111,7 @@
         <span>Excluir cerveja</span>
       </v-tooltip>
 
-       <v-tooltip top>
+      <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="success"
@@ -122,7 +119,8 @@
             small
             dark
             :to="{ name: 'Home' }"
-            v-bind="attrs" v-on="on" 
+            v-bind="attrs"
+            v-on="on"
           >
             <v-icon>mdi-glass-mug</v-icon>
           </v-btn>
@@ -136,6 +134,8 @@
 </template>
 <script>
 import colorDisplayer from "./ColorDisplayer";
+import { deleteAjax } from "../infra/ajax";
+
 const createProps = (type, names) =>
   names
     .map(name => ({ [name]: { type } }))
@@ -170,15 +170,19 @@ export default {
       );
     }
   },
-  data(){
+  data() {
     return {
-      deleteModal: false
-    }
+      deleteModal: false,
+      deleting: false
+    };
   },
-  methods:{
-    deleteBeer(){
+  methods: {
+    async deleteBeer() {
+      this.deleting = true;
+      await deleteAjax(`Beers/${this.id}`);
+      this.deleting = false;
       this.deleteModal = false;
-      window.console.log("delete");
+      this.$router.push({ name: "Home" });
     }
   }
 };
@@ -200,13 +204,18 @@ export default {
     grid-template-rows: 120px 140px 100px 100px auto 60px
     grid-template-areas: "name image" "description image" "harmonization image" "ingredients image" "details image" "details actions"
 
+  @media screen and (max-width: 900px)
+    grid-template-columns: 1fr
+    grid-template-rows: 120px 440px 140px 100px 100px auto 60px
+    grid-template-areas: "name" "image" "description" "harmonization" "ingredients" "details" "actions"
+
   *
-    justify-self: stretch !important
     align-self: center
 
   .image
     grid-area: image
     max-height: 100%
+    max-width: 100%
     justify-self: center
     width: auto
     height: auto
@@ -241,9 +250,17 @@ export default {
     display: grid
     grid-template-columns: 1fr 1fr
     grid-template-rows: 1fr 1fr
-    grid-template-areas: "name image" "color color"
+    grid-template-areas: "temperature degree" "color color"
     text-align: left
     margin-right: 20px
+
+    @media screen and (max-width: 1100px)
+      grid-template-columns: 1fr 2fr 1fr
+      grid-template-rows: 1fr
+      grid-template-areas: "temperature color degree"
+
+    *
+      align-self: flex-start
 
     .color-picker
       grid-area: color
