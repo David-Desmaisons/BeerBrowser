@@ -20,17 +20,18 @@
 
     <div class="details">
       <h2>Temperatura ideal</h2>
-      {{ temperature }}
+      {{ minTemperature }} - {{maxTemperature}} ºC
       <h2>Teor alcoólico</h2>
-      {{ alcoholPercentage }}%
+      {{ alcoholPercentage }} % vol
       <h2>Cor</h2>
-      {{ color }} % vol
+      <colorDisplayer class="color-picker" :value="color" readonly/>
     </div>
 
     <img class="image" :src="pictureUrl" alt="foto" />
   </v-card>
 </template>
 <script>
+import colorDisplayer from "./ColorDisplayer";
 const createProps = (type, names) =>
   names
     .map(name => ({ [name]: { type } }))
@@ -43,16 +44,18 @@ export default {
       "description",
       "harmonization",
       "ingredients",
-      "temperature",
       "pictureUrl"
     ]),
-    ...createProps(Number, ["id", "alcoholPercentage", "color"])
+    ...createProps(Number, ["id", "alcoholPercentage", "color", "minTemperature", "maxTemperature"])
+  },
+  components:{
+    colorDisplayer
   }
 };
 </script>
 <style lang="sass" scoped>
 .beer-detail
-  margin: 20px
+  margin-top: 20px
   display: grid
   max-width: 1090px
   grid-template-columns: minmax(auto, 1fr) 2fr 300px
@@ -60,7 +63,7 @@ export default {
   grid-template-areas: "name image harmonization" "description image details" "ingredients image actions"
   column-gap: 10px
   row-gap: 10px
-  padding: 10px
+  padding: 10px 10px 10px 10px
 
   @media screen and (max-width: 1100px)
     grid-template-columns: 1fr 1fr
@@ -94,4 +97,6 @@ export default {
 
   .details
     grid-area: details
+    .color-picker
+      margin-right: 10px
 </style>
