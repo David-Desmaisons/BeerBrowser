@@ -1,13 +1,13 @@
 <template>
   <v-card class="beer-card">
     <img class="picture" alt="foto" :src="beer.pictureUrl" />
-    <v-card-text class="name">{{  beer.name }}</v-card-text>
+    <v-card-text class="name">{{ beer.name }}</v-card-text>
     <v-tooltip bottom="">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           class="more-info"
           x-small
-          icon 
+          icon
           :to="{ name: 'Info', params: { id: `${beer.id}` } }"
           v-bind="attrs"
           v-on="on"
@@ -58,5 +58,4 @@ export default {
     grid-column: 2
     grid-row: 1
     margin-top: 10px
-
 </style>

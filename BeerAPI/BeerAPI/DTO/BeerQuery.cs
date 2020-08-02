@@ -7,5 +7,7 @@
         public decimal AlcoholPercentage { get; set; }
         public string Temperature { get; set; }
         public string Ingredients { get; set; }
+        public int PageNumber { get; set; }
+        public int MaxItems { get; set; }
     }
 }

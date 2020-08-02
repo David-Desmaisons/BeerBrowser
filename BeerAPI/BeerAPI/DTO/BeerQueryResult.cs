@@ -2,13 +2,13 @@
 {
     public class BeerQueryResult
     {
-        public BeerQueryResult(BeerDescriptionResult[] results, bool remainingItems)
+        public BeerQueryResult(BeerDescriptionResult[] results, bool done)
         {
             Results = results;
-            RemainingItems = remainingItems;
+            Done = done;
         }
 
         public BeerDescriptionResult[] Results { get; }
-        public bool RemainingItems { get; }
+        public bool Done { get; }
     }
 }
