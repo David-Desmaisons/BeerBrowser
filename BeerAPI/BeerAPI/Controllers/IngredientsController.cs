@@ -19,10 +19,10 @@ namespace BeerAPI.Controllers
             return new[]
             {
                 new IngredientResult(1, "água"),
-                new IngredientResult(1, "ovo"),
-                new IngredientResult(1, "malte"),
-                new IngredientResult(1, "lúpulo"),
-                new IngredientResult(1, "arroz")
+                new IngredientResult(2, "ovo"),
+                new IngredientResult(3, "malte"),
+                new IngredientResult(4, "lúpulo"),
+                new IngredientResult(5, "arroz")
             };
         }
     }

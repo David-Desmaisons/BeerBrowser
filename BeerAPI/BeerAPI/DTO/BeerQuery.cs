@@ -16,7 +16,8 @@ namespace BeerAPI.DTO
         [ModelBinder(BinderType = typeof(RangeModelBinder))]
         public Range Temperature { get; set; }
 
-        public string Ingredient { get; set; }
+        public int? IngredientId { get; set; }
+
         public int PageNumber { get; set; }
         public int MaxItems { get; set; }
     }

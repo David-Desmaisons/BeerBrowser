@@ -21,6 +21,7 @@
                 <Autocomplete
                   v-model="query.ingredient"
                   label="Ingredient"
+                  url="ingredients"
                   placeholder="Digita aqui"
                 />
               </v-col>
@@ -106,7 +107,7 @@ export default {
       filtered: false,
       query: {
         name: "",
-        ingredient: "",
+        ingredient: null,
         color: {
           min: 0,
           max: 100
@@ -146,14 +147,16 @@ export default {
   },
   methods: {
     async loadNextPage() {
-      const { loadedAll, loading, pageNumber } = this;
+      const { loadedAll, loading, pageNumber, query } = this;
       if (loadedAll || loading) {
         return;
       }
       this.loading = true;
       try {
-        const query = { pageNumber, pageLength, ...this.query };
-        const newBeers = await get("Beers", query);
+        const { ingredient } = query;
+        const ingredientId = ingredient === null ? null : ingredient.id;
+        const realQuery = { pageNumber, pageLength, ...query, ingredientId };
+        const newBeers = await get("Beers", realQuery);
         this.beers.push(...newBeers.results);
         this.loadedAll = newBeers.done;
         this.pageNumber = pageNumber + 1;
