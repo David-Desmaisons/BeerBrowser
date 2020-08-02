@@ -6,7 +6,8 @@
       @input="change(evt)"
       dense
       min="0"
-      max="100"/>
+      max="100"
+    />
   </div>
 </template>
 <script>

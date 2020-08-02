@@ -19,12 +19,38 @@
     </div>
 
     <div class="details">
-      <h2>Temperatura ideal</h2>
-      {{ minTemperature }} - {{maxTemperature}} ºC
-      <h2>Teor alcoólico</h2>
-      {{ alcoholPercentage }} % vol
-      <h2>Cor</h2>
-      <colorDisplayer class="color-picker" :value="color" readonly/>
+      <div>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon v-bind="attrs" v-on="on">mdi-thermometer</v-icon>
+            {{ minTemperature }} - {{ maxTemperature }} ºC
+          </template>
+          <span>Temperatura ideal</span>
+        </v-tooltip>
+        
+      </div>
+
+      <div class="alcohol">
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon v-bind="attrs" v-on="on">mdi-percent-outline</v-icon>
+            {{ alcoholPercentage }}%
+          </template>
+          <span>Teor alcoólico (% vol)</span>
+        </v-tooltip>
+        
+      </div>
+
+       <div class="color-picker">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <colorDisplayer :value="color" readonly v-bind="attrs" v-on="on"/>
+          </template>
+          <span>Cor</span>
+        </v-tooltip>
+      </div>
+
+      
     </div>
 
     <img class="image" :src="pictureUrl" alt="foto" />
@@ -46,9 +72,15 @@ export default {
       "ingredients",
       "pictureUrl"
     ]),
-    ...createProps(Number, ["id", "alcoholPercentage", "color", "minTemperature", "maxTemperature"])
+    ...createProps(Number, [
+      "id",
+      "alcoholPercentage",
+      "color",
+      "minTemperature",
+      "maxTemperature"
+    ])
   },
-  components:{
+  components: {
     colorDisplayer
   }
 };
@@ -56,8 +88,8 @@ export default {
 <style lang="sass" scoped>
 .beer-detail
   margin-top: 20px
-  display: grid
   max-width: 1090px
+  display: grid
   grid-template-columns: minmax(auto, 1fr) 2fr 300px
   grid-template-rows: 120px 320px 60px
   grid-template-areas: "name image harmonization" "description image details" "ingredients image actions"
@@ -94,9 +126,20 @@ export default {
 
   .harmonization
     grid-area: harmonization
+    margin-right: 20px
 
   .details
     grid-area: details
+    display: grid
+    grid-template-columns: 1fr 1fr
+    grid-template-rows: 1fr 1fr
+    grid-template-areas: "name image" "color color"
+    text-align: left
+    margin-right: 20px
+
     .color-picker
-      margin-right: 10px
+      grid-area: color
+
+    .alcohol
+      text-align: right
 </style>
