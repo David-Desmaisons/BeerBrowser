@@ -13,19 +13,19 @@ const routes = [
   },
   {
     path: "/beer/create",
-    name: "BeerCreate",
+    name: "Create",
     component: () =>
       import(/* webpackChunkName: "create" */ "../views/BeerCreate.vue")
   },
   {
     path: "/beer/:id",
-    name: "Beer",
+    name: "Info",
     props: true,
     component: () => import(/* webpackChunkName: "view" */ "../views/Beer.vue")
   },
   {
     path: "/beer/edit/:id",
-    name: "BeerEdit",
+    name: "Edit",
     props: true,
     component: () =>
       import(/* webpackChunkName: "edit" */ "../views/BeerEdit.vue")

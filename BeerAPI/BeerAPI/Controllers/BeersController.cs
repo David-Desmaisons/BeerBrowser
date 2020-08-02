@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using BeerAPI.DTO;
 using Microsoft.AspNetCore.Http;
@@ -13,14 +12,107 @@ namespace BeerAPI.Controllers
     {
         // GET api/values
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<BeerResult>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BeerQueryResult), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<BeerResult>>> Get([FromQuery] BeerQuery query)
+        public async Task<ActionResult<BeerQueryResult>> Get([FromQuery] BeerQuery query)
         {
-            return new []
+            return new BeerQueryResult(new[]
             {
-                Bud()
-            };
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"), new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"), new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+                new BeerDescriptionResult(1, "Budweiser",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/budweiser_600ml.png"),
+                new BeerDescriptionResult(2, "beck's",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/becks_330ml.png"),
+                new BeerDescriptionResult(3, "Bohemia Imperial",
+                    @"https://www.ambev.com.br/conteudo/uploads/2019/03/bohemia-imperial_550ml.png"),
+            }, false);
         }
 
         // GET api/values/5

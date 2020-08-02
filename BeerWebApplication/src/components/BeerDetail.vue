@@ -85,7 +85,7 @@
             color="primary"
             fab
             small
-            :to="{ name: 'BeerEdit', params: { id: `${id}` } }"
+            :to="{ name: 'Edit', params: { id: `${id}` } }"
             v-bind="attrs"
             v-on="on"
           >
