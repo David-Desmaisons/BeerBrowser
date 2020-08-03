@@ -19,7 +19,6 @@
 <script>
 import { ajaxHandler } from "vue-ajax-handler";
 import detail from "../components/BeerDetail";
-import { get } from "../infra/ajax";
 
 export default {
   name: "Beer",
@@ -28,9 +27,6 @@ export default {
       type: String,
       required: true
     }
-  },
-  provide: {
-    get
   },
   components: {
     ajaxHandler,

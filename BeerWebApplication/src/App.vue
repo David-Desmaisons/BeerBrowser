@@ -30,11 +30,16 @@
 </template>
 
 <script>
+import { get } from "@/infra/ajax";
+
 export default {
   name: "App",
   data: () => ({
     //
   }),
+  provide: {
+    get
+  },
   methods: {
     scrollToTop() {
       window.scrollTo(0, 0);
