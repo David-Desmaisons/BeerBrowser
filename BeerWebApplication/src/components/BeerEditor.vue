@@ -185,7 +185,7 @@ export default {
       try {
         await verb(formData);
       } finally {
-        this.$route.push({ name: "Home" });
+        this.$router.push({name:"Home"});
       }
     }
   }
