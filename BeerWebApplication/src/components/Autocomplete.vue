@@ -9,7 +9,6 @@
     hide-no-data
     hide-selected
     item-text="name"
-    item-value="API"
     :label="label"
     :placeholder="placeholder"
     return-object
@@ -46,7 +45,6 @@ export default {
   },
   methods: {
     input(value) {
-      window.console.log(value);
       this.$emit("input", value);
     }
   },

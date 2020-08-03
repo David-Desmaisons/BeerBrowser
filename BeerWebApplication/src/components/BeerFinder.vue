@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-flex lg12 xs8 offset-xs2 row wrap class="mt-5 mb-5">
+    <v-flex lg12 xs8 offset-xs2 row wrap class="mt-5 mb-5 main-container">
       <v-overlay :value="firstload">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
       </v-overlay>
@@ -194,7 +194,7 @@ export default {
   width: 100%
   margin-right: 150px
   display: block
-  background-color: rgba(255, 0, 0, 0.6)
+  background-color: rgba(255, 0, 0, 0.4)
 
 .color-picker ::v-deep .v-slider.v-slider--horizontal
   background-image: url(../assets/range-product-color.png)
