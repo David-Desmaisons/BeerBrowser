@@ -72,7 +72,9 @@
             </div>
 
             <div class="action">
-              <v-btn small color="primary" :disabled="!valid">salvar</v-btn>
+              <v-btn small color="primary" :disabled="!valid" @click="save"
+                >salvar</v-btn
+              >
             </div>
           </div>
         </v-form>
@@ -83,6 +85,7 @@
 <script>
 import Range from "./RangeComponent";
 import ColorDisplayer from "./ColorDisplayer";
+import { put, post } from "../infra/ajax";
 
 export default {
   name: "BeerEditor",
@@ -147,6 +150,43 @@ export default {
         this.pictureUrl = e.target.result;
       };
       reader.readAsDataURL(value);
+    }
+  },
+  methods: {
+    getFormData() {
+      const {
+        description,
+        fileUpload,
+        harmonization,
+        name,
+        alcoholPercentage,
+        color,
+        ingredients,
+        temperature
+      } = this;
+      const formData = new FormData();
+      formData.append("picture", fileUpload);
+      formData.append("description",description);
+      formData.append("name",name);
+      formData.append("harmonization",harmonization);
+      formData.append("alcoholPercentage",alcoholPercentage);
+      formData.append("color",color);
+      formData.append("ingredients",JSON.stringify(ingredients));
+      formData.append("ingredients",JSON.stringify(ingredients));
+      formData.append("temperature",JSON.stringify(temperature));
+      return formData;
+    },
+    async save() {
+      const { id, saveModel } = this;
+      const verb = saveModel
+        ? data => put(`Beers/${id}`, data) 
+        : data => post("Beers", data);
+      const formData = this.getFormData();
+      try {
+        await verb(formData);
+      } finally {
+        this.$route.push({ name: "Home" });
+      }
     }
   }
 };

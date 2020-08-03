@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BeerAPI.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +9,11 @@ namespace BeerAPI.Controllers
     [ApiController]
     public class BeersController : ControllerBase
     {
-        // GET api/values
         [HttpGet]
         [ProducesResponseType(typeof(BeerQueryResult), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<BeerQueryResult>> Get([FromQuery] BeerQuery query)
         {
-            //return new BeerQueryResult(new BeerDescriptionResult[0], true);
             return new BeerQueryResult(new[]
             {
                 new BeerDescriptionResult(1, "Budweiser",
@@ -28,7 +25,6 @@ namespace BeerAPI.Controllers
             }, true);
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(BeerResult), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -52,15 +48,13 @@ namespace BeerAPI.Controllers
                 .Build();
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody] BeerResultBuilder value)
+        public void Post([FromForm] BeerCommand payload)
         {
         }
 
-        // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] BeerResultBuilder value)
+        public void Put(int id, [FromForm] BeerCommand value)
         {
         }
 

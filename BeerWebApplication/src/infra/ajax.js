@@ -11,10 +11,13 @@ async function get(url, params = null) {
   return response.data;
 }
 
-async function put(url, id, data) {
+async function put(url, data) {
   const completeUrl = getFullUrl(url);
   const response = await axios.put(completeUrl, data, {
-    withCredentials: true
+    withCredentials: true,
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
   });
   return response.data;
 }
@@ -23,7 +26,7 @@ async function post(url, data) {
   const completeUrl = getFullUrl(url);
   const response = await axios.post(completeUrl, data, {
     withCredentials: true,
-    headers: { "Content-Type": "application/json" }
+    headers: { "Content-Type": "multipart/form-data" }
   });
   return response.data;
 }
