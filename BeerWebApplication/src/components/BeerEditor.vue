@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-flex>
-      <v-card class="editor">
+      <v-card class="editor mx-auto" max-width="800">
         <v-form ref="form" v-model="valid">
           <div class="form">
             <v-text-field
@@ -14,7 +14,8 @@
 
             <ColorDisplayer v-model="color" :readonly="false" label="Cor" />
 
-            <Range class-="slider temperature"
+            <Range
+              class-="slider temperature"
               v-model="temperature"
               :min="0"
               :max="40"
@@ -22,7 +23,8 @@
               unity="ºC"
             />
 
-            <v-slider class-="slider alcohol"
+            <v-slider
+              class-="slider alcohol"
               v-model="alcoholPercentage"
               label="Teor alcoólico"
               thumb-label="always"
@@ -57,13 +59,19 @@
             />
 
             <div class="image">
-              <v-file-input accept="image/*" label="Imagem"></v-file-input>
-              <div>
-                <img :src="pictureUrl" v-if="pictureUrl"/>
+              <v-file-input
+                accept="image/*"
+                label="Foto"
+                prepend-icon="mdi-camera"
+                :rules="pictureUrl ? [] : requiredRules"
+                v-model="fileUpload"
+              ></v-file-input>
+              <div class="image-container">
+                <img :src="pictureUrl" v-if="pictureUrl" />
               </div>
             </div>
 
-          <div class="action">
+            <div class="action">
               <v-btn small color="primary" :disabled="!valid">salvar</v-btn>
             </div>
           </div>
@@ -90,14 +98,13 @@ export default {
   },
   data() {
     const data = {
-      requiredRules: [
-        v => !!v || 'campo Obrigatório',
-      ],
-      valid: false
-    }
+      requiredRules: [v => !!v || "campo Obrigatório"],
+      valid: false,
+      fileUpload: null
+    };
     const { saveModel } = this;
     if (saveModel) {
-      return { ...saveModel, ...data };
+      return { ...saveModel, ...data, valid: true };
     }
     return {
       ...data,
@@ -112,24 +119,34 @@ export default {
         min: 0,
         max: 100
       },
-      ingredients: [],
-      pictureFile: null
+      ingredients: []
     };
   },
   computed: {
     displayIngredients: {
       get() {
-        const {ingredients} = this;
-        return ingredients.length === 0 ? "" : ingredients.reduce(
-          (previous, current) => `${previous}, ${current}`
-        );
+        const { ingredients } = this;
+        return ingredients.length === 0
+          ? ""
+          : ingredients.reduce(
+              (previous, current) => `${previous}, ${current}`
+            );
       },
       set(value) {
         this.ingredients = value.split(",").map(ing => ing.replace(/\s/g, ""));
       }
-    },
-    imageUrl(){
-      return this.pictureUrl;
+    }
+  },
+  watch: {
+    fileUpload(value) {
+      if (value === null) {
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.pictureUrl = e.target.result;
+      };
+      reader.readAsDataURL(value);
     }
   }
 };
@@ -151,6 +168,9 @@ export default {
     justify-self: stretch
     width: 100%
     height: 100%
+
+    .image-container
+      flex-grow: 2
 
     img
       //align-items: center
