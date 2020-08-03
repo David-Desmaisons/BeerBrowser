@@ -166,26 +166,25 @@ export default {
       } = this;
       const formData = new FormData();
       formData.append("picture", fileUpload);
-      formData.append("description",description);
-      formData.append("name",name);
-      formData.append("harmonization",harmonization);
-      formData.append("alcoholPercentage",alcoholPercentage);
-      formData.append("color",color);
-      formData.append("ingredients",JSON.stringify(ingredients));
-      formData.append("ingredients",JSON.stringify(ingredients));
-      formData.append("temperature",JSON.stringify(temperature));
+      formData.append("description", description);
+      formData.append("name", name);
+      formData.append("harmonization", harmonization);
+      formData.append("alcoholPercentage", alcoholPercentage);
+      formData.append("color", color);
+      formData.append("ingredients", JSON.stringify(ingredients));
+      formData.append("temperature", JSON.stringify(temperature));
       return formData;
     },
     async save() {
       const { id, saveModel } = this;
       const verb = saveModel
-        ? data => put(`Beers/${id}`, data) 
+        ? data => put(`Beers/${id}`, data)
         : data => post("Beers", data);
       const formData = this.getFormData();
       try {
         await verb(formData);
       } finally {
-        this.$router.push({name:"Home"});
+        this.$router.push({ name: "Home" });
       }
     }
   }
