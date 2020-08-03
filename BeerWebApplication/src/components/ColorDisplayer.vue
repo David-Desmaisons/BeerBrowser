@@ -3,7 +3,8 @@
     <v-slider
       :value="value"
       :readonly="readonly"
-      @input="change(evt)"
+      :label="label"
+      @input="change"
       dense
       hide-details
       min="0"
@@ -21,6 +22,9 @@ export default {
     value: {
       type: Number,
       required: true
+    },
+    label: {
+      type: String
     }
   },
   methods: {

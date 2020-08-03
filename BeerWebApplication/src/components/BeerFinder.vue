@@ -41,7 +41,7 @@
                   v-model="query.temperature"
                   label="Temperatura ideal"
                   thumb-label="always"
-                  unidade="ºC"
+                  unity="ºC"
                   :min="0"
                   :max="30"
                 />
@@ -52,7 +52,7 @@
                   v-model="query.alcoholPercentage"
                   label="Teor alcoólico"
                   thumb-label="always"
-                  unidade="%"
+                  unity="%"
                   :min="0"
                   :max="40"
                 />

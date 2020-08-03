@@ -52,7 +52,7 @@
         <v-tooltip top>
           <template v-slot:activator="{ on, attrs }">
             <v-icon v-bind="attrs" v-on="on">mdi-thermometer</v-icon>
-            {{ minTemperature }} - {{ maxTemperature }} ºC
+            {{ temperature.min }} - {{ temperature.max }} ºC
           </template>
           <span>Temperatura ideal</span>
         </v-tooltip>
@@ -129,19 +129,16 @@ export default {
     ingredients: {
       type: Array
     },
+    temperature: {
+      type: Object
+    },
     ...createProps(String, [
       "name",
       "description",
       "harmonization",
       "pictureUrl"
     ]),
-    ...createProps(Number, [
-      "id",
-      "alcoholPercentage",
-      "color",
-      "minTemperature",
-      "maxTemperature"
-    ])
+    ...createProps(Number, ["id", "alcoholPercentage", "color"])
   },
   components: {
     colorDisplayer

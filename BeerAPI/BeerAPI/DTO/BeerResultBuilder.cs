@@ -8,8 +8,7 @@
         private string _Harmonization;
         private int _Color;
         private decimal _AlcoholPercentage;
-        private int _MinTemperature;
-        private int _MaxTemperature;
+        private Range _Temperature;
         private string[] _Ingredients;
         private string _PictureUrl;
 
@@ -43,15 +42,9 @@
             return this;
         }
 
-        public BeerResultBuilder SetMaxTemperature(int value)
+        public BeerResultBuilder SetTemperature(Range value)
         {
-            _MaxTemperature = value;
-            return this;
-        }
-
-        public BeerResultBuilder SetMinTemperature(int value)
-        {
-            _MinTemperature = value;
+            _Temperature = value;
             return this;
         }
 
@@ -75,7 +68,7 @@
 
         public BeerResult Build()
         {
-            return new BeerResult(_Id, _Name, _Description, _MinTemperature, _MaxTemperature, _PictureUrl, _AlcoholPercentage, _Harmonization, _Color, _Ingredients);
+            return new BeerResult(_Id, _Name, _Description, _Temperature, _PictureUrl, _AlcoholPercentage, _Harmonization, _Color, _Ingredients);
         }
     }
 }
