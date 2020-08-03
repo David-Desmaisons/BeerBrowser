@@ -1,9 +1,12 @@
-﻿using BeerAPI.Infra;
+﻿using BeerAPI.Data.Migration;
+using BeerAPI.Infra;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using FluentMigrator.Runner;
+
 
 namespace BeerAPI
 {
@@ -30,6 +33,13 @@ namespace BeerAPI
             {
                 swagger.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "API" });
             });
+
+            services
+                .AddLogging(c => c.AddFluentMigratorConsole())
+                .AddFluentMigratorCore()
+                .ConfigureRunner(c => c.AddPostgres10_0()
+                        .WithGlobalConnectionString(Configuration["ConnectionString"])
+                        .ScanIn(typeof(Migration_202008031642_Ingredient).Assembly).For.All());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +71,8 @@ namespace BeerAPI
             });
 
             app.UseMvc();
+
+            app.Migrate();
         }
     }
 }

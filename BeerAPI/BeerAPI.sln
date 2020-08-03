@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerAPI", "BeerAPI\BeerAPI.csproj", "{9CCC3E8E-33CE-4E2D-AB41-3F24CB5BD062}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerAPI", "BeerAPI\BeerAPI.csproj", "{9CCC3E8E-33CE-4E2D-AB41-3F24CB5BD062}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerAPI.Services", "BeerAPI.Services\BeerAPI.Services.csproj", "{9DEA4F5E-CB30-4245-877E-958C7ED7AE74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerAPI.Services", "BeerAPI.Services\BeerAPI.Services.csproj", "{9DEA4F5E-CB30-4245-877E-958C7ED7AE74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerAPI.Tests", "BeerAPI.Tests\BeerAPI.Tests.csproj", "{B9D00768-F678-4B13-9FC2-ED05436CB6C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerAPI.Tests", "BeerAPI.Tests\BeerAPI.Tests.csproj", "{B9D00768-F678-4B13-9FC2-ED05436CB6C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerAPI.Services.Tests", "BeerAPI.Services.Tests\BeerAPI.Services.Tests.csproj", "{985B63DD-42D5-4064-8509-BAAF33250D25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerAPI.Services.Tests", "BeerAPI.Services.Tests\BeerAPI.Services.Tests.csproj", "{985B63DD-42D5-4064-8509-BAAF33250D25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerAPI.Data", "BeerAPI.Data\BeerAPI.Data.csproj", "{C7CD5803-0C12-4DF9-B0DF-72BEBD397098}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{985B63DD-42D5-4064-8509-BAAF33250D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{985B63DD-42D5-4064-8509-BAAF33250D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{985B63DD-42D5-4064-8509-BAAF33250D25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7CD5803-0C12-4DF9-B0DF-72BEBD397098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7CD5803-0C12-4DF9-B0DF-72BEBD397098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7CD5803-0C12-4DF9-B0DF-72BEBD397098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7CD5803-0C12-4DF9-B0DF-72BEBD397098}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
