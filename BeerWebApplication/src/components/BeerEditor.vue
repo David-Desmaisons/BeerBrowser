@@ -64,7 +64,7 @@
             </div>
 
           <div class="action">
-              <v-btn small color="primary">salvar</v-btn>
+              <v-btn small color="primary" :disabled="!valid">salvar</v-btn>
             </div>
           </div>
         </v-form>
@@ -119,9 +119,10 @@ export default {
   computed: {
     displayIngredients: {
       get() {
-        return this.ingredients.reduce(
+        const {ingredients} = this;
+        return ingredients.length === 0 ? "" : ingredients.reduce(
           (previous, current) => `${previous}, ${current}`
-        , "");
+        );
       },
       set(value) {
         this.ingredients = value.split(",").map(ing => ing.replace(/\s/g, ""));
