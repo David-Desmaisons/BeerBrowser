@@ -88,7 +88,7 @@ import { get } from "../infra/ajax";
 import debounce from "lodash.debounce";
 import ScrollWatch from "scrollwatch";
 
-const pageLength = 20;
+const maxItems = 20;
 
 export default {
   name: "BeerFinder",
@@ -126,7 +126,7 @@ export default {
   mounted() {
     const watch = new ScrollWatch({
       infiniteScroll: true,
-      watch: ".container", 
+      watch: ".container",
       infiniteOffset: 200,
       onInfiniteYInView: () => {
         this.loadNextPage();
@@ -151,7 +151,7 @@ export default {
       try {
         const { ingredient } = query;
         const ingredientId = ingredient === null ? null : ingredient.id;
-        const realQuery = { pageNumber, pageLength, ...query, ingredientId };
+        const realQuery = { pageNumber, maxItems, ...query, ingredientId };
         const newBeers = await get("Beers", realQuery);
         this.beers.push(...newBeers.results);
         this.loadedAll = newBeers.done;
