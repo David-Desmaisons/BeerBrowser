@@ -19,9 +19,9 @@ namespace BeerAPI.Data.Mapping
             Map(b => b.MaxTemperature).Column("maxtemp").Not.Nullable();
             Map(b => b.Image).Column("picture").Not.Nullable();
             HasManyToMany(b => b.Ingredients)
-                .Table("beer-ingredients")
-                .ParentKeyColumn("beer-id")
-                .ChildKeyColumn("ingredient-id");
+                .Table("beeringredients")
+                .ParentKeyColumn("beerid")
+                .ChildKeyColumn("ingredientid");
 
             Table("beer");
         }
