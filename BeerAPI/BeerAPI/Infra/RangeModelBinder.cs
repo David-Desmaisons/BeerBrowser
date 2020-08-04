@@ -1,8 +1,8 @@
 ﻿using System;
-using BeerAPI.DTO;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using BeerAPI.Services.DTO;
 
 namespace BeerAPI.Infra
 {

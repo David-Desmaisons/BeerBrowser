@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using BeerAPI.Data.Entity;
+using BeerAPI.Services.DTO;
 
 namespace BeerAPI.Services
 {
     public interface IBeerFinder
     {
-        Task<IList<Beer>> FindByCriteria();
+        Task<IList<BeerDescriptionResult>> FindByCriteria(BeerQuery query);
 
-        Beer FindById(int id);
+        BeerResult FindById(int id);
     }
 }

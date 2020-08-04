@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using BeerAPI.DTO;
+using BeerAPI.Services.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using BeerCommand = BeerAPI.DTO.BeerCommand;
 
 namespace BeerAPI.Controllers
 {

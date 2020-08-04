@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using BeerAPI.Infra;
-using Microsoft.AspNetCore.Mvc;
 
-namespace BeerAPI.DTO
+namespace BeerAPI.Services.DTO
 {
     public class BeerQuery
     {

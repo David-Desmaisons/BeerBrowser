@@ -1,9 +1,9 @@
 ﻿using AutoFixture.Xunit2;
-using BeerAPI.DTO;
+using BeerAPI.Services.DTO;
 using FluentAssertions;
 using Xunit;
 
-namespace BeerAPI.Tests.DTO
+namespace BeerAPI.Services.Tests.DTO
 {
     public class BeerResultBuilderTests
     {

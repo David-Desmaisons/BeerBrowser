@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using BeerAPI.Services.DTO;
 using Microsoft.AspNetCore.Http;
 
 namespace BeerAPI.DTO

@@ -1,4 +1,4 @@
-﻿namespace BeerAPI.DTO
+﻿namespace BeerAPI.Services.DTO
 {
     public class Range
     {
