@@ -14,9 +14,9 @@ namespace BeerAPI.Services
             _Session = session;
         }
 
-        public Task<IList<Ingredient>> GetAllIngredients()
+        public Task<IList<Ingredient>> GetAllIngredientsAsync()
         {
-            return _Session.QueryOver<Ingredient>().ListAsync<Ingredient>();
+            return _Session.QueryOver<Ingredient>().OrderBy(d => d.Name).Asc.ListAsync<Ingredient>();
         }
     }
 }

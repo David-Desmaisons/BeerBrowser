@@ -24,7 +24,7 @@ namespace BeerAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IEnumerable<IngredientResult>> Get()
         {
-            var data = await _Provider.GetAllIngredients();
+            var data = await _Provider.GetAllIngredientsAsync();
             return data.Select(ing => new IngredientResult(ing.Id.Value, ing.Name));
         }
     }

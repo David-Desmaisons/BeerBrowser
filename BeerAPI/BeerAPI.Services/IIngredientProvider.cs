@@ -6,6 +6,6 @@ namespace BeerAPI.Services
 {
     public interface IIngredientProvider
     {
-        Task<IList<Ingredient>> GetAllIngredients();
+        Task<IList<Ingredient>> GetAllIngredientsAsync();
     }
 }
