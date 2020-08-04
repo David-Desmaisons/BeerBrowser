@@ -13,9 +13,9 @@ namespace BeerAPI.Data.Migration
                 .WithColumn("description").AsString(5000).NotNullable()
                 .WithColumn("harmonization").AsString(5000).NotNullable()
                 .WithColumn("color").AsDecimal().NotNullable()
-                .WithColumn("alcohol-percentage").AsDecimal().NotNullable()
-                .WithColumn("min-temperature").AsDecimal().NotNullable()
-                .WithColumn("max-temperature").AsDecimal().NotNullable()
+                .WithColumn("alcohol").AsDecimal().NotNullable()
+                .WithColumn("mintemp").AsDecimal().NotNullable()
+                .WithColumn("maxtemp").AsDecimal().NotNullable()
                 .WithColumn("picture").AsBinary().NotNullable();
         }
 

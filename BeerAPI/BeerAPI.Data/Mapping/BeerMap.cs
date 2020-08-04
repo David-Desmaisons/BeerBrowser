@@ -14,9 +14,9 @@ namespace BeerAPI.Data.Mapping
             Map(b => b.Harmonization).Column("harmonization").Length(500).Not.Nullable();
 
             Map(b => b.Color).Column("color").Not.Nullable();
-            Map(b => b.AlcoholPercentage).Column("alcohol-percentage").Not.Nullable();
-            Map(b => b.MinTemperature) .Column("min-temperature").Not.Nullable();
-            Map(b => b.MaxTemperature).Column("max-temperature").Not.Nullable();
+            Map(b => b.AlcoholPercentage).Column("alcohol").Not.Nullable();
+            Map(b => b.MinTemperature) .Column("mintemp").Not.Nullable();
+            Map(b => b.MaxTemperature).Column("maxtemp").Not.Nullable();
             Map(b => b.Image).Column("picture").Not.Nullable();
             HasManyToMany(b => b.Ingredients)
                 .Table("beer-ingredients")
