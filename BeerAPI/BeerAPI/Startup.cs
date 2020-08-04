@@ -50,7 +50,10 @@ namespace BeerAPI
 
             services.AddNHibernate(connectionString);
 
-            services.AddScoped<IIngredientProvider, IngredientProvider>();
+            services.Scan(scan =>
+                scan.FromAssemblyOf<IIngredientProvider>()
+                    .AddClasses()
+                    .AsMatchingInterface());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
