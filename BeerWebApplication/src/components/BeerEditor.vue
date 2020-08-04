@@ -72,7 +72,12 @@
             </div>
 
             <div class="action">
-              <v-btn small color="primary" :disabled="!valid" @click="save"
+              <v-btn
+                small
+                color="primary"
+                :disabled="!valid"
+                @click="save"
+                type="submit"
                 >salvar</v-btn
               >
             </div>
