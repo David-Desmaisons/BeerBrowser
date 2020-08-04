@@ -16,7 +16,7 @@ namespace BeerAPI.Services
 
         public Task<IList<Ingredient>> GetAllIngredientsAsync()
         {
-            return _Session.QueryOver<Ingredient>().OrderBy(d => d.Name).Asc.ListAsync<Ingredient>();
+            return _Session.QueryOver<Ingredient>().OrderBy(d => d.Name).Asc.ListAsync();
         }
     }
 }

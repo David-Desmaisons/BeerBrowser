@@ -28,7 +28,7 @@ namespace BeerAPI.Services.Tests
             };
             _Session = Substitute.For<ISession>();
             _InicialQueryOver = Substitute.For<IQueryOver<Ingredient, Ingredient>>();
-            _InicialQueryOver.ListAsync<Ingredient>().Returns(Task.FromResult(_Ingredients));
+            _InicialQueryOver.ListAsync().Returns(Task.FromResult(_Ingredients));
             _Ordered = new IQueryOverOrderBuilder<Ingredient, Ingredient>(_InicialQueryOver, p => p.Name);
 
             _Session.QueryOver<Ingredient>().Returns(_InicialQueryOver);
