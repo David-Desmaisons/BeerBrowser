@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BeerAPI
 {
-    public static class ServiceExtensions
+    public static class CorsExtensions
     {
         public static IServiceCollection AddCorsForApplication(this IServiceCollection services, IHostingEnvironment env, IConfiguration configuration)
         {
