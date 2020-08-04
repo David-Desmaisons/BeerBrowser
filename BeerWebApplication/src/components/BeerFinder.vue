@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="container">
     <v-flex lg12 xs8 offset-xs2 row wrap class="mt-5 mb-5 main-container">
       <v-overlay :value="firstload">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
@@ -126,13 +126,13 @@ export default {
   mounted() {
     const watch = new ScrollWatch({
       infiniteScroll: true,
-      watch: "section",
+      watch: ".container", 
       infiniteOffset: 200,
       onInfiniteYInView: () => {
         this.loadNextPage();
       }
     });
-    this.$once("hook:destroy", () => {
+    this.$once("hook:beforeDestroy", () => {
       watch.destroy();
     });
   },
