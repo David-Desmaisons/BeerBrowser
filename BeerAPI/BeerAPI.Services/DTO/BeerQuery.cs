@@ -18,6 +18,9 @@ namespace BeerAPI.Services.DTO
         public int? IngredientId { get; set; }
 
         public int PageNumber { get; set; }
+
         public int MaxItems { get; set; }
+
+        public int Skip => PageNumber * MaxItems;
     }
 }
