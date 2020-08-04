@@ -7,21 +7,21 @@ namespace BeerAPI.Data.Migration
     {
         public override void Up()
         {
-            Create.Table("Beer")
-                .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("Name").AsString(50).NotNullable().Unique()
-                .WithColumn("Description").AsString(5000).NotNullable()
-                .WithColumn("Harmonization").AsString(5000).NotNullable()
-                .WithColumn("Color").AsDecimal().NotNullable()
-                .WithColumn("AlcoholPercentage").AsDecimal().NotNullable()
-                .WithColumn("MinTemperature").AsDecimal().NotNullable()
-                .WithColumn("MaxTemperature").AsDecimal().NotNullable()
-                .WithColumn("Picture").AsBinary().NotNullable();
+            Create.Table("beer")
+                .WithColumn("id").AsInt32().NotNullable().PrimaryKey().Identity()
+                .WithColumn("name").AsString(50).NotNullable().Unique()
+                .WithColumn("description").AsString(5000).NotNullable()
+                .WithColumn("harmonization").AsString(5000).NotNullable()
+                .WithColumn("color").AsDecimal().NotNullable()
+                .WithColumn("alcohol-percentage").AsDecimal().NotNullable()
+                .WithColumn("min-temperature").AsDecimal().NotNullable()
+                .WithColumn("max-temperature").AsDecimal().NotNullable()
+                .WithColumn("picture").AsBinary().NotNullable();
         }
 
         public override void Down()
         {
-            Delete.Table("Beer");
+            Delete.Table("beer");
         }
     }
 }

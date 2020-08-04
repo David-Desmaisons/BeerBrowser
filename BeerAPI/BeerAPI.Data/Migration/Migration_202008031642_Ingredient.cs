@@ -8,14 +8,14 @@ namespace BeerAPI.Data.Migration
     {
         public override void Up()
         {
-            Create.Table("Ingredient")
-                .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("Name").AsString(50).NotNullable().Unique();
+            Create.Table("ingredient")
+                .WithColumn("id").AsInt32().NotNullable().PrimaryKey().Identity()
+                .WithColumn("name").AsString(50).NotNullable().Unique();
         }
 
         public override void Down()
         {
-            Delete.Table("Ingredient");
+            Delete.Table("ingredient");
         }
     }
 }

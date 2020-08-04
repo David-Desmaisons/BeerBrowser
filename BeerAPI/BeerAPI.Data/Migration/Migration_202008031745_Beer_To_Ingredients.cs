@@ -7,18 +7,18 @@ namespace BeerAPI.Data.Migration
     {
         public override void Up()
         {
-            Create.Table("BeerIngredients")
-                .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("BeerId").AsInt32().NotNullable()
-                .WithColumn("IngredientId").AsInt32().NotNullable();
+            Create.Table("beer-ingredients")
+                .WithColumn("id").AsInt32().NotNullable().PrimaryKey().Identity()
+                .WithColumn("beer-id").AsInt32().NotNullable()
+                .WithColumn("ingredient-id").AsInt32().NotNullable();
 
-            Create.ForeignKey().FromTable("BeerIngredients").ForeignColumn("BeerId").ToTable("Beer").PrimaryColumn("Id");
-            Create.ForeignKey().FromTable("BeerIngredients").ForeignColumn("IngredientId").ToTable("Ingredient").PrimaryColumn("Id");
+            Create.ForeignKey().FromTable("beer-ingredients").ForeignColumn("beer-id").ToTable("beer").PrimaryColumn("id");
+            Create.ForeignKey().FromTable("beer-ingredients").ForeignColumn("ingredient-id").ToTable("ingredient").PrimaryColumn("id");
         }
 
         public override void Down()
         {
-            Delete.Table("BeerIngredients");
+            Delete.Table("beer-ingredients");
         }
     }
 }
