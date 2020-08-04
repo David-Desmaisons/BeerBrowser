@@ -28,7 +28,11 @@ namespace BeerAPI
         {
             services.AddCorsForApplication(_Environment, Configuration);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(config =>
+            {
+                config.ModelBinderProviders.Insert(0, new ArrayStringModelBinder());
+                config.ModelBinderProviders.Insert(0, new RangeModelBinder());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(swagger =>
             {

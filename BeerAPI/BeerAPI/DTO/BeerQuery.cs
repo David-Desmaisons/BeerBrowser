@@ -1,4 +1,5 @@
-﻿using BeerAPI.Infra;
+﻿using System.ComponentModel.DataAnnotations;
+using BeerAPI.Infra;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeerAPI.DTO
@@ -7,13 +8,13 @@ namespace BeerAPI.DTO
     {
         public string Name { get; set; }
 
-        [ModelBinder(BinderType = typeof(RangeModelBinder))]
+        [Required]
         public Range Color { get; set; }
 
-        [ModelBinder(BinderType = typeof(RangeModelBinder))]
+        [Required]
         public Range AlcoholPercentage { get; set; }
 
-        [ModelBinder(BinderType = typeof(RangeModelBinder))]
+        [Required]
         public Range Temperature { get; set; }
 
         public int? IngredientId { get; set; }

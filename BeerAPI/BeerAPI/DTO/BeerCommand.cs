@@ -1,6 +1,5 @@
-﻿using BeerAPI.Infra;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BeerAPI.DTO
 {
@@ -11,9 +10,9 @@ namespace BeerAPI.DTO
         public string Harmonization { get; set; }
         public int Color { get; set; }
         public decimal AlcoholPercentage { get; set; }
-        [ModelBinder(BinderType = typeof(RangeModelBinder))]
+        [Required]
         public Range Temperature { get; set; }
-        [ModelBinder(BinderType = typeof(ArrayStringModelBinder))]
+        [Required]
         public string[] Ingredients { get; set; }
         public IFormFile Picture { get; set; }
     }
