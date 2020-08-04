@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using BeerAPI.DTO;
+using BeerAPI.Services;
 using BeerAPI.Services.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +11,13 @@ namespace BeerAPI.Controllers
     [ApiController]
     public class BeersController : ControllerBase
     {
+        private readonly IBeerFinder _BeerFinder;
+
+        public BeersController(IBeerFinder beerFinder)
+        {
+            _BeerFinder = beerFinder;
+        }
+
         [HttpGet]
         [ProducesResponseType(typeof(BeerQueryResult), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

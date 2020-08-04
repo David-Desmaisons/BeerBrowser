@@ -8,6 +8,6 @@ namespace BeerAPI.Services
     {
         Task<IList<BeerDescriptionResult>> FindByCriteria(BeerQuery query);
 
-        BeerResult FindById(int id);
+        Task<BeerResult> FindById(int id);
     }
 }
