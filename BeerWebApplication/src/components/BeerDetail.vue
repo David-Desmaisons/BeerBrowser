@@ -182,7 +182,7 @@ export default {
   margin-top: 20px
   max-width: 1090px
   display: grid
-  grid-template-columns: minmax(auto, 1fr) 2fr 300px
+  grid-template-columns: 1fr 1fr 300px
   grid-template-rows: 120px 320px 60px
   grid-template-areas: "name image harmonization" "description image details" "ingredients image actions"
   column-gap: 10px
@@ -201,6 +201,7 @@ export default {
 
   *
     align-self: center
+    overflow: hidden
 
   .image
     grid-area: image
@@ -212,7 +213,7 @@ export default {
 
   .name
     grid-area: name
-    font-size: 71px
+    font-size: 60px
     font-weight: bold
 
   .description
