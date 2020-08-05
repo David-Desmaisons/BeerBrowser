@@ -1,7 +1,6 @@
 BeerBrowser
 
 
-
 ## Architecture
 
 - The web-application is a Single Page Application implemented in vue.js.
@@ -11,9 +10,8 @@ Infinite scroll loading has been used.
 - The back-end API is a REST-API implemented in ASP.Net Core. The persistency is using a PostgreSQL database.
 It is decomposed in 3 layers: 
   - the Site is responsible for exposing the Rest API
-  - Services implements and exposes the functionality to the site. 
+  - Services implements and exposes the functionality to the site. CQRS principles have been applied with an separation between read and write objects.
   - Data provide entities Nhibernate mapping and migrations. 
-
 
 ## Build instructions
 
