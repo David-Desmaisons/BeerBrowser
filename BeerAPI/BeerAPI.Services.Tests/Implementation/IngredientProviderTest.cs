@@ -9,7 +9,7 @@ using NHibernate.Criterion.Lambda;
 using NSubstitute;
 using Xunit;
 
-namespace BeerAPI.Services.Tests
+namespace BeerAPI.Services.Tests.Implementation
 {
     public class IngredientProviderTest
     {
