@@ -45,7 +45,8 @@ namespace BeerAPI.Services.Implementation
             using (var transaction = _Session.BeginTransaction())
             {
                 var information = command.Information;
-                var beer = Convert(information);
+                var beer = new Beer();
+                Update(beer, information);
                 await SetIngredients(beer, information.Ingredients);
                 await _Session.SaveAsync(beer);
                 await transaction.CommitAsync();
@@ -82,22 +83,6 @@ namespace BeerAPI.Services.Implementation
         {
             var ingredient = await _Session.QueryOver<Ingredient>().Where(ing => ing.Name == name).SingleOrDefaultAsync();
             return ingredient ?? new Ingredient() { Name = name };
-        }
-
-        private static Beer Convert(BeerInformation information)
-        {
-            return new Beer
-            {
-                Name = information.Name,
-                AlcoholPercentage = information.AlcoholPercentage,
-                Color = information.Color,
-                Description = information.Description,
-                Harmonization = information.Harmonization,
-                MinTemperature = information.Temperature.Min,
-                MaxTemperature = information.Temperature.Max,
-                Image = information.Picture,
-                PictureContentType = information.PictureContentType
-            };
         }
     }
 }
