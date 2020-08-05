@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using BeerAPI.Data.Entity;
 using BeerAPI.Services.DTO;
@@ -76,9 +77,9 @@ namespace BeerAPI.Services.Implementation
 
         private async Task SetIngredients(Beer beer, string[] ingredients)
         {
-            foreach (var ingredientName in ingredients)
+            foreach (var ingredientName in ingredients.Select(ing => ing.ToLower()).Distinct())
             {
-                var ingredient = await FindOrCreate(ingredientName.ToLower());
+                var ingredient = await FindOrCreate(ingredientName);
                 beer.Ingredients.Add(ingredient);
             }
         }
