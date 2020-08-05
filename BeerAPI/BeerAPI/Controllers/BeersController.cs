@@ -33,15 +33,26 @@ namespace BeerAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<BeerResult>> Get(int id)
         {
-            return await _BeerFinder.FindById(id);
+            var res = await _BeerFinder.FindById(id);
+            if (res == null)
+            {
+                return NotFound();
+            }
+
+            return res;
         }
 
         [HttpPost]
-        public async Task Post([FromForm] BeerCommand payload)
+        public async Task<ActionResult> Post([FromForm] BeerCommand payload)
         {
+            if (payload.Picture == null)
+            {
+                return BadRequest();
+            }
             var information = payload.Transform();
             var command = new CreateBeerCommand(information);
             await _BeerUpdater.Create(command);
+            return Ok();
         }
 
         [HttpPut("{id}")]

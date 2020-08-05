@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using BeerAPI.Controllers;
 using BeerAPI.DTO;
 using BeerAPI.Services;
 using BeerAPI.Services.DTO;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using NSubstitute;
 using Xunit;
 
@@ -25,7 +28,10 @@ namespace BeerAPI.Tests.Controllers
         {
             _BeerResult = new BeerResult(1,"","", null,"",0,"",0,null);
             _BeerQueryResult = new BeerQueryResult(null, true);
-            _BeerCommand = new BeerCommand();
+            var fakeStream = Substitute.For<IFormFile>();
+            fakeStream.OpenReadStream().Returns(new MemoryStream());
+            fakeStream.ContentType.Returns("picture");
+            _BeerCommand = new BeerCommand {Picture = fakeStream };
 
             _BeerFinder = Substitute.For<IBeerFinder>();
             _BeerFinder.FindById(Arg.Any<int>()).Returns(Task.FromResult(_BeerResult));
@@ -52,6 +58,18 @@ namespace BeerAPI.Tests.Controllers
         }
 
         [Theory, AutoData]
+        public async Task Get_Id_Returns_404_When_not_Found(int id)
+        {
+            _BeerFinder.FindById(id).Returns(Task.FromResult<BeerResult>(null));
+
+            var res = await _BeerController.Get(id);
+
+            var status = res.Result as IStatusCodeActionResult;
+            status.Should().NotBeNull();
+            status?.StatusCode.Should().Be(404);
+        }
+
+        [Theory, AutoData]
         public async Task Get_Query_Calls_BeerFinder_FindByCriteria(BeerQuery query)
         {
             await _BeerController.Get(query);
@@ -68,11 +86,41 @@ namespace BeerAPI.Tests.Controllers
         }
 
         [Fact]
+        public async Task Post_Fails_Without_Picture()
+        {
+            _BeerCommand.Picture = null;
+            var res = await _BeerController.Post(_BeerCommand);
+
+            var status = res as IStatusCodeActionResult;
+            status.Should().NotBeNull();
+            status?.StatusCode.Should().Be(400);
+        }
+
+        [Fact]
+        public async Task Post_Does_Not_Call_BeerUpdater_Create_Without_Picture()
+        {
+            _BeerCommand.Picture = null;
+            await _BeerController.Post(_BeerCommand);
+
+            await _BeerUpdater.Received(0).Create(Arg.Any<CreateBeerCommand>());
+        }
+
+        [Fact]
         public async Task Post_Calls_BeerUpdater_Create()
         {
             await _BeerController.Post(_BeerCommand);
 
             await _BeerUpdater.Received(1).Create(Arg.Any<CreateBeerCommand>());
+        }
+
+        [Fact]
+        public async Task Post_Returns_200_With_Picture()
+        {
+            var res = await _BeerController.Post(_BeerCommand);
+
+            var status = res as IStatusCodeActionResult;
+            status.Should().NotBeNull();
+            status?.StatusCode.Should().Be(200);
         }
 
         [Theory, AutoData]
