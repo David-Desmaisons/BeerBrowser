@@ -29,6 +29,16 @@
       </v-card>
     </v-dialog>
 
+    <v-snackbar v-model="showError" :multi-line="multiLine">
+      Problema ao excluir a cerveja
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+
     <div class="name">
       {{ name }}
     </div>
@@ -153,16 +163,21 @@ export default {
   data() {
     return {
       deleteModal: false,
-      deleting: false
+      deleting: false,
+      showError: false
     };
   },
   methods: {
     async deleteBeer() {
       this.deleting = true;
-      await deleteAjax(`Beers/${this.id}`);
+      try {
+        await deleteAjax(`Beers/${this.id}`);
+        this.$router.push({ name: "Home" });
+      } catch {
+        this.showError = true;
+      }
       this.deleting = false;
       this.deleteModal = false;
-      this.$router.push({ name: "Home" });
     }
   }
 };
@@ -233,14 +248,12 @@ export default {
     grid-template-areas: "temperature degree" "color color"
     text-align: left
     margin-right: 20px
+    align-self: stretch
 
     @media screen and (max-width: 1100px)
       grid-template-columns: 1fr 2fr 1fr
       grid-template-rows: 1fr
       grid-template-areas: "temperature color degree"
-
-    *
-      align-self: flex-start
 
     .color-picker
       grid-area: color

@@ -1,5 +1,15 @@
 <template>
   <v-container>
+    <v-snackbar v-model="showError" :multi-line="multiLine">
+      Problema ao {{ operation }} a cerveja
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+
     <v-flex>
       <v-card class="editor mx-auto" max-width="800">
         <v-form ref="form" v-model="valid">
@@ -72,13 +82,9 @@
             </div>
 
             <div class="action">
-              <v-btn
-                small
-                color="primary"
-                :disabled="!valid"
-                @click="save"
-                >{{isNew ? 'criar' : 'alterar'}}</v-btn
-              >
+              <v-btn small color="primary" :disabled="!valid" @click="save">{{
+                operation
+              }}</v-btn>
             </div>
           </div>
         </v-form>
@@ -107,7 +113,8 @@ export default {
     const data = {
       requiredRules: [v => !!v || "campo Obrigatório"],
       valid: false,
-      fileUpload: null
+      fileUpload: null,
+      showError: false
     };
     const { saveModel } = this;
     if (saveModel) {
@@ -143,8 +150,11 @@ export default {
         this.ingredients = value.split(",").map(ing => ing.replace(/\s/g, ""));
       }
     },
-    isNew(){
+    isNew() {
       return !this.saveModel;
+    },
+    operation() {
+      return this.isNew ? "criar" : "alterar";
     }
   },
   watch: {
@@ -185,13 +195,14 @@ export default {
     async save() {
       const { id, isNew } = this;
       const verb = isNew
-        ? data => post("Beers", data) : 
-          data => put(`Beers/${id}`, data);
+        ? data => post("Beers", data)
+        : data => put(`Beers/${id}`, data);
       const formData = this.getFormData();
       try {
         await verb(formData);
-      } finally {
         this.$router.push({ name: "Home" });
+      } catch {
+        this.showError = true;
       }
     }
   }
