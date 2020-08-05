@@ -77,7 +77,8 @@
                 v-model="fileUpload"
               ></v-file-input>
               <div class="image-container">
-                <img :src="pictureUrl" v-if="pictureUrl" />
+                <img class="beer" :src="pictureUrl" v-if="pictureUrl" />
+                <img class="placeholder" src="../assets/download.jpg" v-else />
               </div>
             </div>
 
@@ -214,6 +215,7 @@ export default {
   grid-template-columns: 1fr 1fr
   grid-template-rows: 80px repeat(3, 100px) repeat(2, 200px) 1fr
   grid-template-areas: "name image" "color image" "temperature image" "alcohol image" "description image" "harmonization image" "ingredient salvar"
+  column-gap: 10px
   margin: 40px
   align-items: center
 
@@ -229,8 +231,14 @@ export default {
     .image-container
       flex-grow: 2
 
-    img
-      //align-items: center
+    img.beer
+      max-height: 100%
+      max-width: 100%
+      justify-self: center
+      width: auto
+      height: auto
+
+    img.placeholder
       max-height: 100%
       max-width: 100%
       justify-self: center
