@@ -24,17 +24,5 @@
         public string[] Ingredients { get;  }
         public byte[] Picture { get; }
         public string PictureContentType { get; }
-
-
-
-        //Name = Name,
-        //AlcoholPercentage = AlcoholPercentage,
-        //Color = Color,
-        //Description = Description,
-        //Harmonization = Harmonization,
-        //Ingredients = Ingredients,
-        //Temperature = Temperature,
-        //Picture = data,
-        //PictureContentType = Picture.ContentType
     }
 }

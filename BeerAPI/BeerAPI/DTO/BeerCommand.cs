@@ -28,7 +28,6 @@ namespace BeerAPI.DTO
         [Required]
         public string[] Ingredients { get; set; }
 
-        [Required]
         public IFormFile Picture { get; set; }
 
         public BeerInformation Transform()

@@ -17,8 +17,12 @@ namespace BeerAPI.Services.Implementation
 
         public async Task Delete(int beerId)
         {
-            var beer = new Beer() { Id = beerId };
-            await _Session.DeleteAsync(beer);
+            using (var transaction = _Session.BeginTransaction())
+            {
+                var beer = await _Session.LoadAsync<Beer>(beerId);
+                await _Session.DeleteAsync(beer);
+                await transaction.CommitAsync();
+            }
         }
 
         public async Task Update(UpdateBeerCommand command)

@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using BeerAPI.Data.Entity;
 using BeerAPI.Services.DTO;
 using NHibernate;
-using NHibernate.Criterion;
 
 namespace BeerAPI.Services.Implementation
 {
@@ -66,17 +65,8 @@ namespace BeerAPI.Services.Implementation
         private static BeerResult Transform(Beer beer)
         {
             var imageUrl = BuildImageFromFile(beer);
-            return new BeerResultBuilder()
-                .SetId(beer.Id.Value)
-                .SetName(beer.Name)
-                .SetDescription(beer.Description)
-                .SetHarmonization(beer.Harmonization)
-                .SetAlcoholPercentage(beer.AlcoholPercentage)
-                .SetColor(beer.Color)
-                .SetTemperature(new Range(beer.MinTemperature, beer.MaxTemperature))
-                .SetIngredients(beer.Ingredients.Select(ing => ing.Name).ToArray())
-                .SetPictureUrl(imageUrl)
-                .Build(); ;
+            return new BeerResult(beer.Id.Value, beer.Name, beer.Description, new Range(beer.MinTemperature, beer.MaxTemperature), imageUrl, 
+                beer.AlcoholPercentage, beer.Harmonization, beer.Color, beer.Ingredients.Select(ing => ing.Name).ToArray());
         }
 
         private static string BuildImageFromFile(Beer beer)
