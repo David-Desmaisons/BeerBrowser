@@ -77,8 +77,7 @@
                 color="primary"
                 :disabled="!valid"
                 @click="save"
-                type="submit"
-                >salvar</v-btn
+                >{{isNew ? 'criar' : 'alterar'}}</v-btn
               >
             </div>
           </div>
@@ -143,6 +142,9 @@ export default {
       set(value) {
         this.ingredients = value.split(",").map(ing => ing.replace(/\s/g, ""));
       }
+    },
+    isNew(){
+      return !this.saveModel;
     }
   },
   watch: {
@@ -181,10 +183,10 @@ export default {
       return formData;
     },
     async save() {
-      const { id, saveModel } = this;
-      const verb = saveModel
-        ? data => put(`Beers/${id}`, data)
-        : data => post("Beers", data);
+      const { id, isNew } = this;
+      const verb = isNew
+        ? data => post("Beers", data) : 
+          data => put(`Beers/${id}`, data);
       const formData = this.getFormData();
       try {
         await verb(formData);
