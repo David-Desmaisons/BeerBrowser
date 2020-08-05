@@ -4,7 +4,7 @@ using BeerAPI.Data.Entity;
 using BeerAPI.Services.DTO;
 using NHibernate;
 
-namespace BeerAPI.Services
+namespace BeerAPI.Services.Implementation
 {
     public class BeerFinder : IBeerFinder
     {

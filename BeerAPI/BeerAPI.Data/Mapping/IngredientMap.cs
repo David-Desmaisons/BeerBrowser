@@ -7,7 +7,7 @@ namespace BeerAPI.Data.Mapping
     {
         public IngredientMap()
         {
-            Id(x => x.Id).Column("id");
+            Id(x => x.Id).Column("id").GeneratedBy.Sequence("ingredient_id_seq");
 
             Map(b => b.Name).Column("name").Length(50).Not.Nullable();
 

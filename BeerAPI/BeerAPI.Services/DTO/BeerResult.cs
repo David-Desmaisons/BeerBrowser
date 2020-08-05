@@ -2,6 +2,7 @@
 {
     public class BeerResult
     {
+        public int Id { get; }
         public string Name { get; }
         public string Description { get; }
         public string Harmonization { get; }
@@ -10,7 +11,6 @@
         public Range Temperature { get; }
         public string[]  Ingredients{ get; }
         public string PictureUrl { get; }
-        public int Id { get; }
 
         public BeerResult(int id, string name, string description, Range temperature, string pictureUrl, decimal alcoholPercentage, string harmonization, int color, string[] ingredients)
         {

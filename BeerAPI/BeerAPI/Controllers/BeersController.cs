@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
+using BeerAPI.DTO;
 using BeerAPI.Services;
 using BeerAPI.Services.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BeerCommand = BeerAPI.DTO.BeerCommand;
 
 namespace BeerAPI.Controllers
 {
@@ -12,10 +12,12 @@ namespace BeerAPI.Controllers
     public class BeersController : ControllerBase
     {
         private readonly IBeerFinder _BeerFinder;
+        private readonly IBeerUpdater _BeerUpdater;
 
-        public BeersController(IBeerFinder beerFinder)
+        public BeersController(IBeerFinder beerFinder, IBeerUpdater beerUpdater)
         {
             _BeerFinder = beerFinder;
+            _BeerUpdater = beerUpdater;
         }
 
         [HttpGet]
@@ -35,19 +37,25 @@ namespace BeerAPI.Controllers
         }
 
         [HttpPost]
-        public void Post([FromForm] BeerCommand payload)
+        public async Task Post([FromForm] BeerCommand payload)
         {
+            var information = payload.Transform();
+            var command = new CreateBeerCommand(information);
+            await _BeerUpdater.Create(command);
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromForm] BeerCommand value)
+        public async Task Put(int id, [FromForm] BeerCommand payload)
         {
+            var information = payload.Transform();
+            var command = new UpdateBeerCommand(id, information);
+            await _BeerUpdater.Update(command);
         }
 
-        // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
+            await _BeerUpdater.Delete(id);
         }
     }
 }

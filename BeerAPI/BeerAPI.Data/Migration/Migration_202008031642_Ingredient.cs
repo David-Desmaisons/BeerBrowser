@@ -8,9 +8,11 @@ namespace BeerAPI.Data.Migration
     {
         public override void Up()
         {
-            Create.Table("ingredient")
-                .WithColumn("id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("name").AsString(50).NotNullable().Unique();
+            Execute.Sql(@"CREATE TABLE public.ingredient
+            (
+                id SERIAL PRIMARY KEY,
+                name character varying(50) COLLATE pg_catalog.""default"" NOT NULL
+            )");
         }
 
         public override void Down()

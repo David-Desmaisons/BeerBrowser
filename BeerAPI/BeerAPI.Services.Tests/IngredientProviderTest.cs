@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BeerAPI.Data.Entity;
+using BeerAPI.Services.Implementation;
 using FluentAssertions;
 using NHibernate;
 using NHibernate.Criterion.Lambda;

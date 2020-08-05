@@ -12,7 +12,8 @@ namespace BeerAPI.Data.Entity
         public virtual decimal AlcoholPercentage { get; set; }
         public virtual int MinTemperature { get; set; }
         public virtual int MaxTemperature { get; set; }
-        public virtual IList<Ingredient> Ingredients { get; set; }
+        public virtual IList<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
         public virtual byte[] Image { get; set; }
+        public virtual string PictureContentType { get; set; }
     }
 }

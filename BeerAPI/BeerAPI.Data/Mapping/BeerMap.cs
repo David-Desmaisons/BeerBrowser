@@ -7,7 +7,7 @@ namespace BeerAPI.Data.Mapping
     {
         public BeerMap()
         {
-            Id(x => x.Id).Column("id");
+            Id(x => x.Id).Column("id").GeneratedBy.Sequence("beer_id_seq");
 
             Map(b => b.Name).Column("name").Length(50).Not.Nullable();
             Map(b => b.Description).Column("description").Length(500).Not.Nullable();
@@ -18,10 +18,11 @@ namespace BeerAPI.Data.Mapping
             Map(b => b.MinTemperature) .Column("mintemp").Not.Nullable();
             Map(b => b.MaxTemperature).Column("maxtemp").Not.Nullable();
             Map(b => b.Image).Column("picture").Not.Nullable();
+            Map(b => b.PictureContentType).Column("contenttype").Not.Nullable();
             HasManyToMany(b => b.Ingredients)
                 .Table("beeringredients")
                 .ParentKeyColumn("beerid")
-                .ChildKeyColumn("ingredientid");
+                .ChildKeyColumn("ingredientid").Cascade.SaveUpdate();
 
             Table("beer");
         }

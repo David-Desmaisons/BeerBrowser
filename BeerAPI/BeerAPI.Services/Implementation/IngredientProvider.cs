@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using BeerAPI.Data.Entity;
 using NHibernate;
 
-namespace BeerAPI.Services
+namespace BeerAPI.Services.Implementation
 {
     public class IngredientProvider : IIngredientProvider
     {
