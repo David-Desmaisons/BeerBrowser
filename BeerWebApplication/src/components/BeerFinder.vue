@@ -70,7 +70,7 @@
           <br />
         </v-card-title>
         <v-card-text v-if="!filtered">
-          <router-link :to="{ name: 'Create' }">Clica aqui</router-link>para
+          <router-link :to="{ name: 'Create' }">Clica aqui</router-link> para
           adicionar uma cerveja.
         </v-card-text>
       </v-card>
