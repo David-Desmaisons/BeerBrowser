@@ -2,6 +2,7 @@
   <v-autocomplete
     :value="value"
     @input="input"
+    @focus="load"
     :items="items"
     :loading="isLoading"
     :search-input.sync="search"
@@ -12,6 +13,7 @@
     :label="label"
     :placeholder="placeholder"
     return-object
+    clearable
   ></v-autocomplete>
 </template>
 <script>
@@ -46,15 +48,8 @@ export default {
   methods: {
     input(value) {
       this.$emit("input", value);
-    }
-  },
-  computed: {
-    items() {
-      return this.entries;
-    }
-  },
-  watch: {
-    async search() {
+    },
+    async load() {
       const { items, isLoading, url } = this;
       if (items.length > 0 || isLoading) {
         return;
@@ -67,6 +62,16 @@ export default {
       } finally {
         this.isLoading = false;
       }
+    }
+  },
+  computed: {
+    items() {
+      return this.entries;
+    }
+  },
+  watch: {
+    async search() {
+      await this.load();
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-snackbar v-model="showError" :multi-line="multiLine">
+    <v-snackbar v-model="showError">
       Problema ao {{ operation }} a cerveja
 
       <template v-slot:action="{ attrs }">

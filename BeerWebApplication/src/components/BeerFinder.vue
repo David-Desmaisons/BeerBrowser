@@ -150,7 +150,7 @@ export default {
       this.loading = true;
       try {
         const { ingredient } = query;
-        const ingredientId = ingredient === null ? null : ingredient.id;
+        const ingredientId = !ingredient ? null : ingredient.id;
         const realQuery = { pageNumber, maxItems, ...query, ingredientId };
         const newBeers = await get("Beers", realQuery);
         this.beers.push(...newBeers.results);

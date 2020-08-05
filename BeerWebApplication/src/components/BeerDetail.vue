@@ -29,7 +29,7 @@
       </v-card>
     </v-dialog>
 
-    <v-snackbar v-model="showError" :multi-line="multiLine">
+    <v-snackbar v-model="showError">
       Problema ao excluir a cerveja
 
       <template v-slot:action="{ attrs }">
@@ -54,7 +54,9 @@
 
     <div class="ingredients">
       <h2>ingredientes</h2>
-      <p>{{ allIngredients }}.</p>
+       <v-chip v-for="ing in ingredients" :key="ing" class="tags" color="primary" small>
+          {{ing}}
+        </v-chip>
     </div>
 
     <div class="details">
@@ -153,13 +155,6 @@ export default {
   components: {
     colorDisplayer
   },
-  computed: {
-    allIngredients() {
-      return this.ingredients.reduce(
-        (previous, current) => `${previous}, ${current}`
-      );
-    }
-  },
   data() {
     return {
       deleteModal: false,
@@ -225,8 +220,9 @@ export default {
 
   .ingredients
     grid-area: ingredients
-    ::first-letter
-      text-transform: capitalize
+
+    .tags
+      margin: 3px
 
   .harmonization
     grid-area: harmonization
